@@ -48,8 +48,15 @@ function addPagination (list) {
          const button = `<li>
                            <button type = "button">${i}</button>
                         </li>`;
-         linkList.insertAdjacentHTML('beforeend', button)
-   }
+         linkList[0].insertAdjacentHTML('beforeend', button)
+   
+         const active = document.querySelector('button');
+         active.className = 'active';
 
+         
+   }
+}
 
 // Call functions
+showPage(data, 1);
+addPagination(data);
