@@ -13,7 +13,7 @@ function showPage(list, page) {
    
    const studentList = document.getElementsByClassName('student-list');
 
-   studentList.innerHTML = "";
+   studentList[0].innerHTML = '';
 
    for (let i = 0; i < list.length; i++) {
       if (i >= startIndex && i < endIndex) {
@@ -34,10 +34,15 @@ function showPage(list, page) {
 }
 
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+/**
+ * The addPagination function accepts one argument, list, which store the data object. Using the length
+ * property of list and Math.ceil the number of total pages and corresponding buttons is stored in the
+ * numOfPages const. the linkList const stores the ul with the class link-list and we set its innerHTML 
+ * value to an empty string. The function uses a for loop to create and add five buttons to the bottom 
+ * of the page and uses className to set the first one to be the 'active' button. An event listener is 
+ * put on linkList and that switches the active class to the clicked button and then calls the showPage 
+ * function, passing in the value of the list parameter and the textContent value of the clicked button. 
+ */
 function addPagination (list) {
    const numOfPages = Math.ceil(list.length / 9);
 
@@ -52,11 +57,19 @@ function addPagination (list) {
    
          const active = document.querySelector('button');
          active.className = 'active';
-
-         
    }
+
+   linkList[0].addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+         const active = document.querySelector('.active');
+         active.className ='';
+         e.target.className = 'active';
+
+         showPage(list, e.target.textContent)
+      }
+   })
 }
 
-// Call functions
+//These are the initial function calls that display the first page of nine students.
 showPage(data, 1);
 addPagination(data);
